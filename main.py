@@ -43,18 +43,21 @@ CONFIG = {
     },
 }
 
-
+# 时间处理工具 - 机器人的日历
 class TimeHelper:
     """时间处理工具"""
 
+    # 获取北京时间
     @staticmethod
     def get_beijing_time() -> datetime:
         return datetime.now(pytz.timezone("Asia/Shanghai"))
 
+    # 格式化日期文件夹，为文件夹命名
     @staticmethod
     def format_date_folder() -> str:
         return TimeHelper.get_beijing_time().strftime("%Y年%m月%d日")
 
+    # 格式化时间文件名，为报告文件命名
     @staticmethod
     def format_time_filename() -> str:
         return TimeHelper.get_beijing_time().strftime("%H时%M分")
@@ -148,6 +151,7 @@ class DataFetcher:
     def __init__(self, proxy_url: Optional[str] = None):
         self.proxy_url = proxy_url
 
+    # 获取指定ID数据，支持重试
     def fetch_data(
         self,
         id_info: Union[str, Tuple[str, str]],
